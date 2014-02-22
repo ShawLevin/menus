@@ -28,7 +28,7 @@ namespace Menulator.DataAccess
         public DbSet<RestaurantTag> RestaurantTags { get; set; }
         public DbSet<UserLocation> UserLocations { get; set; }
 
-        public System.Data.Entity.DbSet<Menulator.Models.Category> Categories { get; set; }
+        //public System.Data.Entity.DbSet<Menulator.Models.Category> Categories { get; set; }
 
     }
 }
