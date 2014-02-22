@@ -5,10 +5,10 @@ using System.Web;
 
 namespace Menulator.Models
 {
-    public class Tag
+    public class ItemTag
     {
-        public int TagID { get; set; }
-        public int RestaurantID { get; set; }
+        public int ItemTagID { get; set; }
+        public int ItemID { get; set; }
         public string Value { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Menulator.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201402222008074_Initial"; }
+            get { return "201402222040323_Initial"; }
         }
         
         string IMigrationMetadata.Source
