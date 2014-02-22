@@ -4,20 +4,22 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Menulator.Models;
 
 namespace Menulator.Controllers
 {
+    
     public class RestaurantController : ApiController
     {
-        string[] restaurants = new string[] { "Drexel Pizza", "Axis Pizza" };
+        List<RestaurantModel> restaurants = new List<RestaurantModel> { new RestaurantModel { ID = 1, Name = "Drexel Pizza", Description = "Pizza pizza." }, new RestaurantModel { ID = 2, Name = "Sabrains", Description = "Brunch" } };
         // GET api/values
-        public IEnumerable<string> Get()
+        public List<RestaurantModel> Get()
         {
             return restaurants;
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public RestaurantModel Get(int id)
         {
             return restaurants[id];
         }
