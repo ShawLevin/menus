@@ -1,42 +1,118 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 using Menulator.Models;
+using Menulator.DataAccess;
 
 namespace Menulator.Controllers
 {
-    
     public class RestaurantController : ApiController
     {
-        List<Restaurant> restaurants = new List<Restaurant> { new Restaurant { ID = 1, Name = "Drexel Pizza", Description = "Pizza pizza." }, new Restaurant { ID = 2, Name = "Sabrains", Description = "Brunch" } };
-        // GET api/values
-        public List<Restaurant> Get()
+        private RestaurantContext db = new RestaurantContext();
+
+        // GET api/Restaurant
+        public IQueryable<Restaurant> GetRestaurants()
         {
-            return restaurants;
+            return db.Restaurants;
         }
 
-        // GET api/values/5
-        public Restaurant Get(int id)
+        // GET api/Restaurant/5
+        [ResponseType(typeof(Restaurant))]
+        public IHttpActionResult GetRestaurant(int id)
         {
-            return restaurants[id];
+            Restaurant restaurant = db.Restaurants.Find(id);
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(restaurant);
         }
 
-        // POST api/values
-        public void Post([FromBody]string value)
+        // PUT api/Restaurant/5
+        public IHttpActionResult PutRestaurant(int id, Restaurant restaurant)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != restaurant.ID)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(restaurant).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!RestaurantExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        // POST api/Restaurant
+        [ResponseType(typeof(Restaurant))]
+        public IHttpActionResult PostRestaurant(Restaurant restaurant)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Restaurants.Add(restaurant);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = restaurant.ID }, restaurant);
         }
 
-        // DELETE api/values/5
-        public void Delete(int id)
+        // DELETE api/Restaurant/5
+        [ResponseType(typeof(Restaurant))]
+        public IHttpActionResult DeleteRestaurant(int id)
         {
+            Restaurant restaurant = db.Restaurants.Find(id);
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+
+            db.Restaurants.Remove(restaurant);
+            db.SaveChanges();
+
+            return Ok(restaurant);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool RestaurantExists(int id)
+        {
+            return db.Restaurants.Count(e => e.ID == id) > 0;
         }
     }
 }
