@@ -9,16 +9,17 @@ namespace Menulator.Controllers
 {
     public class RestaurantController : ApiController
     {
+        string[] restaurants = new string[] { "Drexel Pizza", "Axis Pizza" };
         // GET api/values
         public IEnumerable<string> Get()
         {
-            return new string[] { "Drexel Pizza", "Axis Pizza" };
+            return restaurants;
         }
 
         // GET api/values/5
         public string Get(int id)
         {
-            return "value";
+            return restaurants[id];
         }
 
         // POST api/values
