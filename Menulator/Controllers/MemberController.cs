@@ -10,7 +10,7 @@ namespace Menulator.Controllers
 {
     public class MemberController : ApiController
     {
-        List<Member> members = new List<Member> { new Member { ID = 1, Name = "Berian Lee", Email = "pizza@pizzama.com" }, new Member { ID = 2, Name = "Cheep cheep", Email = "pizza@asda.com" } };
+        List<Member> members = new List<Member> { new Member { MemberID = 1, Name = "Berian Lee", Email = "pizza@pizzama.com" }, new Member { MemberID = 2, Name = "Cheep cheep", Email = "pizza@asda.com" } };
         
         // GET api/values
         public List<Member> Get()

@@ -8,23 +8,11 @@ namespace Menulator.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Addresses",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Street = c.String(),
-                        State = c.String(),
-                        ZipCode = c.String(),
-                        SuiteNum = c.String(),
-                    })
-                .PrimaryKey(t => t.ID);
-            
-            CreateTable(
                 "dbo.Hours",
                 c => new
                     {
                         HoursID = c.Int(nullable: false, identity: true),
-                        RestaurantID = c.Int(nullable: false),
+                        LocationID = c.Int(nullable: false),
                         Day = c.String(),
                         Open = c.DateTime(nullable: false),
                         Close = c.DateTime(nullable: false),
@@ -57,12 +45,12 @@ namespace Menulator.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
+                        RestaurantID = c.Int(nullable: false),
                         Title = c.String(),
                         Address = c.String(),
                         Phone = c.String(),
-                        RestaurantID = c.Int(nullable: false),
-                        HourID = c.Int(nullable: false),
-                        MenuID = c.Int(nullable: false),
+                        Longitude = c.Double(nullable: false),
+                        Latitude = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -70,12 +58,13 @@ namespace Menulator.Migrations
                 "dbo.Members",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
+                        MemberID = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Email = c.String(),
+                        Phone = c.Int(nullable: false),
                         LocationID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.MemberID);
             
             CreateTable(
                 "dbo.Menus",
@@ -95,7 +84,7 @@ namespace Menulator.Migrations
                     {
                         OptionID = c.Int(nullable: false, identity: true),
                         ItemID = c.Int(nullable: false),
-                        cost = c.Double(nullable: false),
+                        Cost = c.Double(nullable: false),
                         Description = c.String(),
                         Max = c.Int(nullable: false),
                     })
@@ -105,13 +94,12 @@ namespace Menulator.Migrations
                 "dbo.OrderItems",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
+                        OrderItemID = c.Int(nullable: false, identity: true),
                         OrderID = c.Int(nullable: false),
-                        MemberID = c.Int(nullable: false),
                         ItemID = c.Int(nullable: false),
                         Cost = c.Double(nullable: false),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.OrderItemID);
             
             CreateTable(
                 "dbo.Orders",
@@ -136,6 +124,17 @@ namespace Menulator.Migrations
                 .PrimaryKey(t => t.PreferenceID);
             
             CreateTable(
+                "dbo.Restaurants",
+                c => new
+                    {
+                        RestaurantID = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Description = c.String(),
+                        Contact = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.RestaurantID);
+            
+            CreateTable(
                 "dbo.RestaurantTags",
                 c => new
                     {
@@ -156,14 +155,13 @@ namespace Menulator.Migrations
                     })
                 .PrimaryKey(t => t.UserLocationID);
             
-            AddColumn("dbo.Restaurants", "Contact", c => c.Int(nullable: false));
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Restaurants", "Contact");
             DropTable("dbo.UserLocations");
             DropTable("dbo.RestaurantTags");
+            DropTable("dbo.Restaurants");
             DropTable("dbo.Preferences");
             DropTable("dbo.Orders");
             DropTable("dbo.OrderItems");
@@ -174,7 +172,6 @@ namespace Menulator.Migrations
             DropTable("dbo.ItemTags");
             DropTable("dbo.Items");
             DropTable("dbo.Hours");
-            DropTable("dbo.Addresses");
         }
     }
 }

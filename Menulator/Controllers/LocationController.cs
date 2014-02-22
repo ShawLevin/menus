@@ -11,45 +11,46 @@ using System.Web.Http.Description;
 using Menulator.Models;
 using Menulator.DataAccess;
 
+
 namespace Menulator.Controllers
 {
-    public class RestaurantController : ApiController
+    public class LocationController : ApiController
     {
         private RestaurantContext db = new RestaurantContext();
 
-        // GET api/Restaurant
-        public IQueryable<Restaurant> GetRestaurants()
+        // GET api/Location
+        public IQueryable<Location> GetLocations()
         {
-            return db.Restaurants;
+            return db.Locations;
         }
 
-        // GET api/Restaurant/5
-        [ResponseType(typeof(Restaurant))]
-        public IHttpActionResult GetRestaurant(int id)
+        // GET api/Location/5
+        [ResponseType(typeof(Location))]
+        public IHttpActionResult GetLocation(int id)
         {
-            Restaurant restaurant = db.Restaurants.Find(id);
-            if (restaurant == null)
+            Location location = db.Locations.Find(id);
+            if (location == null)
             {
                 return NotFound();
             }
 
-            return Ok(restaurant);
+            return Ok(location);
         }
 
-        // PUT api/Restaurant/5
-        public IHttpActionResult PutRestaurant(int id, Restaurant restaurant)
+        // PUT api/Location/5
+        public IHttpActionResult PutLocation(int id, Location location)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != restaurant.RestaurantID)
+            if (id != location.ID)
             {
                 return BadRequest();
             }
 
-            db.Entry(restaurant).State = EntityState.Modified;
+            db.Entry(location).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +58,7 @@ namespace Menulator.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RestaurantExists(id))
+                if (!LocationExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +71,35 @@ namespace Menulator.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/Restaurant
-        [ResponseType(typeof(Restaurant))]
-        public IHttpActionResult PostRestaurant(Restaurant restaurant)
+        // POST api/Location
+        [ResponseType(typeof(Location))]
+        public IHttpActionResult PostLocation(Location location)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Restaurants.Add(restaurant);
+            db.Locations.Add(location);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = restaurant.RestaurantID }, restaurant);
+            return CreatedAtRoute("DefaultApi", new { id = location.ID }, location);
         }
 
-        // DELETE api/Restaurant/5
-        [ResponseType(typeof(Restaurant))]
-        public IHttpActionResult DeleteRestaurant(int id)
+        // DELETE api/Location/5
+        [ResponseType(typeof(Location))]
+        public IHttpActionResult DeleteLocation(int id)
         {
-            Restaurant restaurant = db.Restaurants.Find(id);
-            if (restaurant == null)
+            Location location = db.Locations.Find(id);
+            if (location == null)
             {
                 return NotFound();
             }
 
-            db.Restaurants.Remove(restaurant);
+            db.Locations.Remove(location);
             db.SaveChanges();
 
-            return Ok(restaurant);
+            return Ok(location);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +111,9 @@ namespace Menulator.Controllers
             base.Dispose(disposing);
         }
 
-        private bool RestaurantExists(int id)
+        private bool LocationExists(int id)
         {
-            return db.Restaurants.Count(e => e.RestaurantID == id) > 0;
+            return db.Locations.Count(e => e.ID == id) > 0;
         }
     }
 }
