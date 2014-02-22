@@ -13,43 +13,43 @@ using Menulator.DataAccess;
 
 namespace Menulator.Controllers
 {
-    public class MemberController : ApiController
+    public class ItemTagController : ApiController
     {
         private RestaurantContext db = new RestaurantContext();
 
-        // GET api/Member
-        public IQueryable<Member> GetMembers()
+        // GET api/ItemTag
+        public IQueryable<ItemTag> GetItemTags()
         {
-            return db.Members;
+            return db.ItemTags;
         }
 
-        // GET api/Member/5
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult GetMember(int id)
+        // GET api/ItemTag/5
+        [ResponseType(typeof(ItemTag))]
+        public IHttpActionResult GetItemTag(int id)
         {
-            Member member = db.Members.Find(id);
-            if (member == null)
+            ItemTag itemtag = db.ItemTags.Find(id);
+            if (itemtag == null)
             {
                 return NotFound();
             }
 
-            return Ok(member);
+            return Ok(itemtag);
         }
 
-        // PUT api/Member/5
-        public IHttpActionResult PutMember(int id, Member member)
+        // PUT api/ItemTag/5
+        public IHttpActionResult PutItemTag(int id, ItemTag itemtag)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != member.MemberID)
+            if (id != itemtag.ItemTagID)
             {
                 return BadRequest();
             }
 
-            db.Entry(member).State = EntityState.Modified;
+            db.Entry(itemtag).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace Menulator.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MemberExists(id))
+                if (!ItemTagExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace Menulator.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/Member
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult PostMember(Member member)
+        // POST api/ItemTag
+        [ResponseType(typeof(ItemTag))]
+        public IHttpActionResult PostItemTag(ItemTag itemtag)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Members.Add(member);
+            db.ItemTags.Add(itemtag);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = member.MemberID }, member);
+            return CreatedAtRoute("DefaultApi", new { id = itemtag.ItemTagID }, itemtag);
         }
 
-        // DELETE api/Member/5
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult DeleteMember(int id)
+        // DELETE api/ItemTag/5
+        [ResponseType(typeof(ItemTag))]
+        public IHttpActionResult DeleteItemTag(int id)
         {
-            Member member = db.Members.Find(id);
-            if (member == null)
+            ItemTag itemtag = db.ItemTags.Find(id);
+            if (itemtag == null)
             {
                 return NotFound();
             }
 
-            db.Members.Remove(member);
+            db.ItemTags.Remove(itemtag);
             db.SaveChanges();
 
-            return Ok(member);
+            return Ok(itemtag);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace Menulator.Controllers
             base.Dispose(disposing);
         }
 
-        private bool MemberExists(int id)
+        private bool ItemTagExists(int id)
         {
-            return db.Members.Count(e => e.MemberID == id) > 0;
+            return db.ItemTags.Count(e => e.ItemTagID == id) > 0;
         }
     }
 }

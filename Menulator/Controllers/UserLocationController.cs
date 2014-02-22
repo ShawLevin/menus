@@ -13,43 +13,43 @@ using Menulator.DataAccess;
 
 namespace Menulator.Controllers
 {
-    public class MemberController : ApiController
+    public class UserLocationController : ApiController
     {
         private RestaurantContext db = new RestaurantContext();
 
-        // GET api/Member
-        public IQueryable<Member> GetMembers()
+        // GET api/UserLocation
+        public IQueryable<UserLocation> GetUserLocations()
         {
-            return db.Members;
+            return db.UserLocations;
         }
 
-        // GET api/Member/5
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult GetMember(int id)
+        // GET api/UserLocation/5
+        [ResponseType(typeof(UserLocation))]
+        public IHttpActionResult GetUserLocation(int id)
         {
-            Member member = db.Members.Find(id);
-            if (member == null)
+            UserLocation userlocation = db.UserLocations.Find(id);
+            if (userlocation == null)
             {
                 return NotFound();
             }
 
-            return Ok(member);
+            return Ok(userlocation);
         }
 
-        // PUT api/Member/5
-        public IHttpActionResult PutMember(int id, Member member)
+        // PUT api/UserLocation/5
+        public IHttpActionResult PutUserLocation(int id, UserLocation userlocation)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != member.MemberID)
+            if (id != userlocation.UserLocationID)
             {
                 return BadRequest();
             }
 
-            db.Entry(member).State = EntityState.Modified;
+            db.Entry(userlocation).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace Menulator.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MemberExists(id))
+                if (!UserLocationExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace Menulator.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/Member
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult PostMember(Member member)
+        // POST api/UserLocation
+        [ResponseType(typeof(UserLocation))]
+        public IHttpActionResult PostUserLocation(UserLocation userlocation)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Members.Add(member);
+            db.UserLocations.Add(userlocation);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = member.MemberID }, member);
+            return CreatedAtRoute("DefaultApi", new { id = userlocation.UserLocationID }, userlocation);
         }
 
-        // DELETE api/Member/5
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult DeleteMember(int id)
+        // DELETE api/UserLocation/5
+        [ResponseType(typeof(UserLocation))]
+        public IHttpActionResult DeleteUserLocation(int id)
         {
-            Member member = db.Members.Find(id);
-            if (member == null)
+            UserLocation userlocation = db.UserLocations.Find(id);
+            if (userlocation == null)
             {
                 return NotFound();
             }
 
-            db.Members.Remove(member);
+            db.UserLocations.Remove(userlocation);
             db.SaveChanges();
 
-            return Ok(member);
+            return Ok(userlocation);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace Menulator.Controllers
             base.Dispose(disposing);
         }
 
-        private bool MemberExists(int id)
+        private bool UserLocationExists(int id)
         {
-            return db.Members.Count(e => e.MemberID == id) > 0;
+            return db.UserLocations.Count(e => e.UserLocationID == id) > 0;
         }
     }
 }

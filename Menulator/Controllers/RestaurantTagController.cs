@@ -13,43 +13,43 @@ using Menulator.DataAccess;
 
 namespace Menulator.Controllers
 {
-    public class MemberController : ApiController
+    public class RestaurantTagController : ApiController
     {
         private RestaurantContext db = new RestaurantContext();
 
-        // GET api/Member
-        public IQueryable<Member> GetMembers()
+        // GET api/RestaurantTag
+        public IQueryable<RestaurantTag> GetRestaurantTags()
         {
-            return db.Members;
+            return db.RestaurantTags;
         }
 
-        // GET api/Member/5
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult GetMember(int id)
+        // GET api/RestaurantTag/5
+        [ResponseType(typeof(RestaurantTag))]
+        public IHttpActionResult GetRestaurantTag(int id)
         {
-            Member member = db.Members.Find(id);
-            if (member == null)
+            RestaurantTag restauranttag = db.RestaurantTags.Find(id);
+            if (restauranttag == null)
             {
                 return NotFound();
             }
 
-            return Ok(member);
+            return Ok(restauranttag);
         }
 
-        // PUT api/Member/5
-        public IHttpActionResult PutMember(int id, Member member)
+        // PUT api/RestaurantTag/5
+        public IHttpActionResult PutRestaurantTag(int id, RestaurantTag restauranttag)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != member.MemberID)
+            if (id != restauranttag.RestaurantTagID)
             {
                 return BadRequest();
             }
 
-            db.Entry(member).State = EntityState.Modified;
+            db.Entry(restauranttag).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace Menulator.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MemberExists(id))
+                if (!RestaurantTagExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace Menulator.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/Member
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult PostMember(Member member)
+        // POST api/RestaurantTag
+        [ResponseType(typeof(RestaurantTag))]
+        public IHttpActionResult PostRestaurantTag(RestaurantTag restauranttag)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Members.Add(member);
+            db.RestaurantTags.Add(restauranttag);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = member.MemberID }, member);
+            return CreatedAtRoute("DefaultApi", new { id = restauranttag.RestaurantTagID }, restauranttag);
         }
 
-        // DELETE api/Member/5
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult DeleteMember(int id)
+        // DELETE api/RestaurantTag/5
+        [ResponseType(typeof(RestaurantTag))]
+        public IHttpActionResult DeleteRestaurantTag(int id)
         {
-            Member member = db.Members.Find(id);
-            if (member == null)
+            RestaurantTag restauranttag = db.RestaurantTags.Find(id);
+            if (restauranttag == null)
             {
                 return NotFound();
             }
 
-            db.Members.Remove(member);
+            db.RestaurantTags.Remove(restauranttag);
             db.SaveChanges();
 
-            return Ok(member);
+            return Ok(restauranttag);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace Menulator.Controllers
             base.Dispose(disposing);
         }
 
-        private bool MemberExists(int id)
+        private bool RestaurantTagExists(int id)
         {
-            return db.Members.Count(e => e.MemberID == id) > 0;
+            return db.RestaurantTags.Count(e => e.RestaurantTagID == id) > 0;
         }
     }
 }

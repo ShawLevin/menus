@@ -13,43 +13,43 @@ using Menulator.DataAccess;
 
 namespace Menulator.Controllers
 {
-    public class MemberController : ApiController
+    public class HoursController : ApiController
     {
         private RestaurantContext db = new RestaurantContext();
 
-        // GET api/Member
-        public IQueryable<Member> GetMembers()
+        // GET api/Hours
+        public IQueryable<Hours> GetHours()
         {
-            return db.Members;
+            return db.Hours;
         }
 
-        // GET api/Member/5
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult GetMember(int id)
+        // GET api/Hours/5
+        [ResponseType(typeof(Hours))]
+        public IHttpActionResult GetHours(int id)
         {
-            Member member = db.Members.Find(id);
-            if (member == null)
+            Hours hours = db.Hours.Find(id);
+            if (hours == null)
             {
                 return NotFound();
             }
 
-            return Ok(member);
+            return Ok(hours);
         }
 
-        // PUT api/Member/5
-        public IHttpActionResult PutMember(int id, Member member)
+        // PUT api/Hours/5
+        public IHttpActionResult PutHours(int id, Hours hours)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != member.MemberID)
+            if (id != hours.HoursID)
             {
                 return BadRequest();
             }
 
-            db.Entry(member).State = EntityState.Modified;
+            db.Entry(hours).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace Menulator.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MemberExists(id))
+                if (!HoursExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace Menulator.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/Member
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult PostMember(Member member)
+        // POST api/Hours
+        [ResponseType(typeof(Hours))]
+        public IHttpActionResult PostHours(Hours hours)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Members.Add(member);
+            db.Hours.Add(hours);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = member.MemberID }, member);
+            return CreatedAtRoute("DefaultApi", new { id = hours.HoursID }, hours);
         }
 
-        // DELETE api/Member/5
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult DeleteMember(int id)
+        // DELETE api/Hours/5
+        [ResponseType(typeof(Hours))]
+        public IHttpActionResult DeleteHours(int id)
         {
-            Member member = db.Members.Find(id);
-            if (member == null)
+            Hours hours = db.Hours.Find(id);
+            if (hours == null)
             {
                 return NotFound();
             }
 
-            db.Members.Remove(member);
+            db.Hours.Remove(hours);
             db.SaveChanges();
 
-            return Ok(member);
+            return Ok(hours);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace Menulator.Controllers
             base.Dispose(disposing);
         }
 
-        private bool MemberExists(int id)
+        private bool HoursExists(int id)
         {
-            return db.Members.Count(e => e.MemberID == id) > 0;
+            return db.Hours.Count(e => e.HoursID == id) > 0;
         }
     }
 }

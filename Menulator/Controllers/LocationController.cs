@@ -45,7 +45,7 @@ namespace Menulator.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != location.ID)
+            if (id != location.LocationID)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace Menulator.Controllers
             db.Locations.Add(location);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = location.ID }, location);
+            return CreatedAtRoute("DefaultApi", new { id = location.LocationID }, location);
         }
 
         // DELETE api/Location/5
@@ -113,7 +113,7 @@ namespace Menulator.Controllers
 
         private bool LocationExists(int id)
         {
-            return db.Locations.Count(e => e.ID == id) > 0;
+            return db.Locations.Count(e => e.LocationID == id) > 0;
         }
     }
 }

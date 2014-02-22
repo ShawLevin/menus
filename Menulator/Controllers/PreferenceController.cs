@@ -13,43 +13,43 @@ using Menulator.DataAccess;
 
 namespace Menulator.Controllers
 {
-    public class MemberController : ApiController
+    public class PreferenceController : ApiController
     {
         private RestaurantContext db = new RestaurantContext();
 
-        // GET api/Member
-        public IQueryable<Member> GetMembers()
+        // GET api/Preference
+        public IQueryable<Preference> GetPreferences()
         {
-            return db.Members;
+            return db.Preferences;
         }
 
-        // GET api/Member/5
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult GetMember(int id)
+        // GET api/Preference/5
+        [ResponseType(typeof(Preference))]
+        public IHttpActionResult GetPreference(int id)
         {
-            Member member = db.Members.Find(id);
-            if (member == null)
+            Preference preference = db.Preferences.Find(id);
+            if (preference == null)
             {
                 return NotFound();
             }
 
-            return Ok(member);
+            return Ok(preference);
         }
 
-        // PUT api/Member/5
-        public IHttpActionResult PutMember(int id, Member member)
+        // PUT api/Preference/5
+        public IHttpActionResult PutPreference(int id, Preference preference)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != member.MemberID)
+            if (id != preference.PreferenceID)
             {
                 return BadRequest();
             }
 
-            db.Entry(member).State = EntityState.Modified;
+            db.Entry(preference).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace Menulator.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MemberExists(id))
+                if (!PreferenceExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace Menulator.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/Member
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult PostMember(Member member)
+        // POST api/Preference
+        [ResponseType(typeof(Preference))]
+        public IHttpActionResult PostPreference(Preference preference)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Members.Add(member);
+            db.Preferences.Add(preference);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = member.MemberID }, member);
+            return CreatedAtRoute("DefaultApi", new { id = preference.PreferenceID }, preference);
         }
 
-        // DELETE api/Member/5
-        [ResponseType(typeof(Member))]
-        public IHttpActionResult DeleteMember(int id)
+        // DELETE api/Preference/5
+        [ResponseType(typeof(Preference))]
+        public IHttpActionResult DeletePreference(int id)
         {
-            Member member = db.Members.Find(id);
-            if (member == null)
+            Preference preference = db.Preferences.Find(id);
+            if (preference == null)
             {
                 return NotFound();
             }
 
-            db.Members.Remove(member);
+            db.Preferences.Remove(preference);
             db.SaveChanges();
 
-            return Ok(member);
+            return Ok(preference);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace Menulator.Controllers
             base.Dispose(disposing);
         }
 
-        private bool MemberExists(int id)
+        private bool PreferenceExists(int id)
         {
-            return db.Members.Count(e => e.MemberID == id) > 0;
+            return db.Preferences.Count(e => e.PreferenceID == id) > 0;
         }
     }
 }
