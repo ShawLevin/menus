@@ -23,6 +23,12 @@ namespace Menulator.Controllers
             return db.Restaurants;
         }
 
+        [HttpGet]
+        public IQueryable<Restaurant> Search(string filter)
+        {
+            return (from x in db.Restaurants where (x.Name.Contains(filter) || x.Description.Contains(filter)) select x);
+        }
+
         // GET api/Restaurant/5
         [ResponseType(typeof(Restaurant))]
         public IHttpActionResult GetRestaurant(int id)
@@ -72,7 +78,7 @@ namespace Menulator.Controllers
 
         // POST api/Restaurant
         [ResponseType(typeof(Restaurant))]
-        public IHttpActionResult PostRestaurant(Restaurant restaurant)
+        public IHttpActionResult PostRestaurant([FromBody]Restaurant restaurant)
         {
             if (!ModelState.IsValid)
             {

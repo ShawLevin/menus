@@ -24,6 +24,12 @@ namespace Menulator.Controllers
             return db.Locations;
         }
 
+        [HttpGet]
+        public IQueryable<Location> Search(string filter)
+        {
+            return (from x in db.Locations where (x.Title.Contains(filter) || x.Phone.Contains(filter)) select x);
+        }
+
         // GET api/Location/5
         [ResponseType(typeof(Location))]
         public IHttpActionResult GetLocation(int id)
