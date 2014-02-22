@@ -207,7 +207,6 @@
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\MenulatorContext.cs" />
     <Compile Include="Models\Option.cs" />
-    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Order.cs" />

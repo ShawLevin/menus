@@ -9,9 +9,7 @@ namespace Menulator.Models
     {
         public int ID { get; set; }
         public int MemberID { get; set; }
-  
         public int OrderItemID { get; set; }
-    
         public DateTime Date { get; set; }
     
     }

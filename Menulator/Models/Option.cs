@@ -9,7 +9,7 @@ namespace Menulator.Models
     {
         public int OptionID { get; set; }
         public int ItemID { get; set; }
-        public double cost { get; set; }
+        public double Cost { get; set; }
         public string Description { get; set; }
         public int Max { get; set; }
     }
