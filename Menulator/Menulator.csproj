@@ -192,20 +192,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201402222008074_Initial.cs" />
-    <Compile Include="Migrations\201402222008074_Initial.Designer.cs">
-      <DependentUpon>201402222008074_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201402222040323_Initial.cs" />
+    <Compile Include="Migrations\201402222040323_Initial.Designer.cs">
+      <DependentUpon>201402222040323_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Attribute.cs" />
+    <Compile Include="Models\ItemTag.cs" />
     <Compile Include="Models\Hours.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Preference.cs" />
     <Compile Include="Models\UserLocation.cs" />
     <Compile Include="Models\Menu.cs" />
-    <Compile Include="Models\MenulatorContext.cs" />
     <Compile Include="Models\Option.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Location.cs" />
@@ -213,7 +212,7 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\Restaurant.cs" />
-    <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\RestaurantTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -284,8 +283,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201402222008074_Initial.resx">
-      <DependentUpon>201402222008074_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201402222040323_Initial.resx">
+      <DependentUpon>201402222040323_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
