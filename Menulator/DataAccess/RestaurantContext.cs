@@ -13,7 +13,6 @@ namespace Menulator.DataAccess
             : base("RestaurantContext")
         { }
 
-        public DbSet<Address> Addresses { get; set; }
         public DbSet<Hours> Hours { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<ItemTag> ItemTags { get; set; }
