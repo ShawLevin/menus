@@ -10,9 +10,12 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Menulator.Models;
 using Menulator.DataAccess;
+using Thinktecture.IdentityModel;
+using System.Web.Http.Cors;
 
 namespace Menulator.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class RestaurantController : ApiController
     {
         private MenulatorContext db = new MenulatorContext();

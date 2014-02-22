@@ -10,10 +10,12 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Menulator.Models;
 using Menulator.DataAccess;
+using System.Web.Http.Cors;
 
 
 namespace Menulator.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class LocationController : ApiController
     {
         private MenulatorContext db = new MenulatorContext();

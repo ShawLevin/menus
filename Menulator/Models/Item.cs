@@ -10,6 +10,7 @@ namespace Menulator.Models
     {
         [Key]
         public int ItemID { get; set; }
+        public int CategoryID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }

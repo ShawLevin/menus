@@ -8,6 +8,17 @@ namespace Menulator.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Categories",
+                c => new
+                    {
+                        CategoryID = c.Int(nullable: false, identity: true),
+                        ParentCategoryID = c.Int(nullable: false),
+                        Name = c.String(),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.CategoryID);
+            
+            CreateTable(
                 "dbo.Hours",
                 c => new
                     {
@@ -44,7 +55,7 @@ namespace Menulator.Migrations
                 "dbo.Locations",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
+                        LocationID = c.Int(nullable: false, identity: true),
                         RestaurantID = c.Int(nullable: false),
                         Title = c.String(),
                         Address = c.String(),
@@ -52,7 +63,7 @@ namespace Menulator.Migrations
                         Longitude = c.Double(nullable: false),
                         Latitude = c.Double(nullable: false),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.LocationID);
             
             CreateTable(
                 "dbo.Members",
@@ -105,12 +116,12 @@ namespace Menulator.Migrations
                 "dbo.Orders",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
+                        OrderID = c.Int(nullable: false, identity: true),
                         MemberID = c.Int(nullable: false),
-                        OrderItemID = c.Int(nullable: false),
+                        MenuID = c.Int(nullable: false),
                         Date = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.OrderID);
             
             CreateTable(
                 "dbo.Preferences",
@@ -172,6 +183,7 @@ namespace Menulator.Migrations
             DropTable("dbo.ItemTags");
             DropTable("dbo.Items");
             DropTable("dbo.Hours");
+            DropTable("dbo.Categories");
         }
     }
 }

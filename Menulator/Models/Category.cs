@@ -11,6 +11,7 @@ namespace Menulator.Models
         [Key]
         public int CategoryID { get; set; }
         public int ParentCategoryID { get; set; }
+        public int MenuID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }
