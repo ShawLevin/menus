@@ -15,7 +15,7 @@ namespace Menulator.Controllers
 {
     public class MemberController : ApiController
     {
-        private RestaurantContext db = new RestaurantContext();
+        private MenulatorContext db = new MenulatorContext();
 
         // GET api/Member
         public IQueryable<Member> GetMembers()

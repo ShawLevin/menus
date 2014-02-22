@@ -15,7 +15,7 @@ namespace Menulator.Controllers
 {
     public class ItemTagController : ApiController
     {
-        private RestaurantContext db = new RestaurantContext();
+        private MenulatorContext db = new MenulatorContext();
 
         // GET api/ItemTag
         public IQueryable<ItemTag> GetItemTags()

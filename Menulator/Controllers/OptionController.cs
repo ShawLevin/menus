@@ -15,7 +15,7 @@ namespace Menulator.Controllers
 {
     public class OptionController : ApiController
     {
-        private RestaurantContext db = new RestaurantContext();
+        private MenulatorContext db = new MenulatorContext();
 
         // GET api/Option
         public IQueryable<Option> GetOptions()

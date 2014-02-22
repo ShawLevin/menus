@@ -15,7 +15,7 @@ namespace Menulator.Controllers
 {
     public class HoursController : ApiController
     {
-        private RestaurantContext db = new RestaurantContext();
+        private MenulatorContext db = new MenulatorContext();
 
         // GET api/Hours
         public IQueryable<Hours> GetHours()

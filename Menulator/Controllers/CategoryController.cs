@@ -15,7 +15,7 @@ namespace Menulator.Controllers
 {
     public class CategoryController : ApiController
     {
-        private RestaurantContext db = new RestaurantContext();
+        private MenulatorContext db = new MenulatorContext();
 
         // GET api/Category
         public IQueryable<Category> GetCategories()

@@ -7,9 +7,9 @@ using Menulator.Models;
 
 namespace Menulator.DataAccess
 {
-    public class RestaurantContext : DbContext
+    public class MenulatorContext : DbContext
     {
-        public RestaurantContext()
+        public MenulatorContext()
             : base("RestaurantContext")
         { }
  

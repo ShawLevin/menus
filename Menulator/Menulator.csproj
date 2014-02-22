@@ -199,7 +199,7 @@
     <Compile Include="Controllers\RestaurantTagController.cs" />
     <Compile Include="Controllers\UserLocationController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DataAccess\RestaurantContext.cs" />
+    <Compile Include="DataAccess\MenulatorContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

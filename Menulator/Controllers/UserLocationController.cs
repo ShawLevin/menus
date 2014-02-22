@@ -15,7 +15,7 @@ namespace Menulator.Controllers
 {
     public class UserLocationController : ApiController
     {
-        private RestaurantContext db = new RestaurantContext();
+        private MenulatorContext db = new MenulatorContext();
 
         // GET api/UserLocation
         public IQueryable<UserLocation> GetUserLocations()
