@@ -11,15 +11,15 @@ namespace Menulator.Controllers
     
     public class RestaurantController : ApiController
     {
-        List<RestaurantModel> restaurants = new List<RestaurantModel> { new RestaurantModel { ID = 1, Name = "Drexel Pizza", Description = "Pizza pizza." }, new RestaurantModel { ID = 2, Name = "Sabrains", Description = "Brunch" } };
+        List<Restaurant> restaurants = new List<Restaurant> { new Restaurant { ID = 1, Name = "Drexel Pizza", Description = "Pizza pizza." }, new Restaurant { ID = 2, Name = "Sabrains", Description = "Brunch" } };
         // GET api/values
-        public List<RestaurantModel> Get()
+        public List<Restaurant> Get()
         {
             return restaurants;
         }
 
         // GET api/values/5
-        public RestaurantModel Get(int id)
+        public Restaurant Get(int id)
         {
             return restaurants[id];
         }

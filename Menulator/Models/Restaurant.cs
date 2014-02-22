@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Menulator.Models
 {
-    public class RestaurantModel
+    public class Restaurant
     {
         public int ID { get; set; }
         public string Name { get; set; }
