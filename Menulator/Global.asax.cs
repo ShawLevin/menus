@@ -20,7 +20,7 @@ namespace Menulator
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Database.SetInitializer<RestaurantContext>(new CreateDatabaseIfNotExists<RestaurantContext>());
+            Database.SetInitializer<MenulatorContext>(new CreateDatabaseIfNotExists<MenulatorContext>());
         }
     }
 }

@@ -13,43 +13,43 @@ using Menulator.DataAccess;
 
 namespace Menulator.Controllers
 {
-    public class MenuController : ApiController
+    public class OptionController : ApiController
     {
         private MenulatorContext db = new MenulatorContext();
 
-        // GET api/Menu
-        public IQueryable<Menu> GetMenus()
+        // GET api/Option
+        public IQueryable<Option> GetOptions()
         {
-            return db.Menus;
+            return db.Options;
         }
 
-        // GET api/Menu/5
-        [ResponseType(typeof(Menu))]
-        public IHttpActionResult GetMenu(int id)
+        // GET api/Option/5
+        [ResponseType(typeof(Option))]
+        public IHttpActionResult GetOption(int id)
         {
-            Menu menu = db.Menus.Find(id);
-            if (menu == null)
+            Option option = db.Options.Find(id);
+            if (option == null)
             {
                 return NotFound();
             }
 
-            return Ok(menu);
+            return Ok(option);
         }
 
-        // PUT api/Menu/5
-        public IHttpActionResult PutMenu(int id, Menu menu)
+        // PUT api/Option/5
+        public IHttpActionResult PutOption(int id, Option option)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != menu.MenuID)
+            if (id != option.OptionID)
             {
                 return BadRequest();
             }
 
-            db.Entry(menu).State = EntityState.Modified;
+            db.Entry(option).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace Menulator.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MenuExists(id))
+                if (!OptionExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace Menulator.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/Menu
-        [ResponseType(typeof(Menu))]
-        public IHttpActionResult PostMenu(Menu menu)
+        // POST api/Option
+        [ResponseType(typeof(Option))]
+        public IHttpActionResult PostOption(Option option)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Menus.Add(menu);
+            db.Options.Add(option);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = menu.MenuID }, menu);
+            return CreatedAtRoute("DefaultApi", new { id = option.OptionID }, option);
         }
 
-        // DELETE api/Menu/5
-        [ResponseType(typeof(Menu))]
-        public IHttpActionResult DeleteMenu(int id)
+        // DELETE api/Option/5
+        [ResponseType(typeof(Option))]
+        public IHttpActionResult DeleteOption(int id)
         {
-            Menu menu = db.Menus.Find(id);
-            if (menu == null)
+            Option option = db.Options.Find(id);
+            if (option == null)
             {
                 return NotFound();
             }
 
-            db.Menus.Remove(menu);
+            db.Options.Remove(option);
             db.SaveChanges();
 
-            return Ok(menu);
+            return Ok(option);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace Menulator.Controllers
             base.Dispose(disposing);
         }
 
-        private bool MenuExists(int id)
+        private bool OptionExists(int id)
         {
-            return db.Menus.Count(e => e.MenuID == id) > 0;
+            return db.Options.Count(e => e.OptionID == id) > 0;
         }
     }
 }

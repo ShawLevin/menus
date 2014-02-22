@@ -7,12 +7,13 @@ using Menulator.Models;
 
 namespace Menulator.DataAccess
 {
-    public class RestaurantContext : DbContext
+    public class MenulatorContext : DbContext
     {
-        public RestaurantContext()
+        public MenulatorContext()
             : base("RestaurantContext")
         { }
-
+ 
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Hours> Hours { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<ItemTag> ItemTags { get; set; }
@@ -26,6 +27,8 @@ namespace Menulator.DataAccess
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<RestaurantTag> RestaurantTags { get; set; }
         public DbSet<UserLocation> UserLocations { get; set; }
+
+        //public System.Data.Entity.DbSet<Menulator.Models.Category> Categories { get; set; }
 
     }
 }

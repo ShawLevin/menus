@@ -6,13 +6,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Menulator.Models
 {
-    public class Member
+    public class Category
     {
         [Key]
-        public int MemberID { get; set; }
+        public int CategoryID { get; set; }
+        public int ParentCategoryID { get; set; }
         public string Name { get; set; }
-        public string Email { get; set; }
-        public int Phone { get; set; }
-        public int LocationID { get; set; }
+        public string Description { get; set; }
     }
 }

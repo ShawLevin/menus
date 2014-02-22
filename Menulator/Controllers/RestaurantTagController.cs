@@ -13,43 +13,43 @@ using Menulator.DataAccess;
 
 namespace Menulator.Controllers
 {
-    public class MenuController : ApiController
+    public class RestaurantTagController : ApiController
     {
         private MenulatorContext db = new MenulatorContext();
 
-        // GET api/Menu
-        public IQueryable<Menu> GetMenus()
+        // GET api/RestaurantTag
+        public IQueryable<RestaurantTag> GetRestaurantTags()
         {
-            return db.Menus;
+            return db.RestaurantTags;
         }
 
-        // GET api/Menu/5
-        [ResponseType(typeof(Menu))]
-        public IHttpActionResult GetMenu(int id)
+        // GET api/RestaurantTag/5
+        [ResponseType(typeof(RestaurantTag))]
+        public IHttpActionResult GetRestaurantTag(int id)
         {
-            Menu menu = db.Menus.Find(id);
-            if (menu == null)
+            RestaurantTag restauranttag = db.RestaurantTags.Find(id);
+            if (restauranttag == null)
             {
                 return NotFound();
             }
 
-            return Ok(menu);
+            return Ok(restauranttag);
         }
 
-        // PUT api/Menu/5
-        public IHttpActionResult PutMenu(int id, Menu menu)
+        // PUT api/RestaurantTag/5
+        public IHttpActionResult PutRestaurantTag(int id, RestaurantTag restauranttag)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != menu.MenuID)
+            if (id != restauranttag.RestaurantTagID)
             {
                 return BadRequest();
             }
 
-            db.Entry(menu).State = EntityState.Modified;
+            db.Entry(restauranttag).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace Menulator.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MenuExists(id))
+                if (!RestaurantTagExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace Menulator.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/Menu
-        [ResponseType(typeof(Menu))]
-        public IHttpActionResult PostMenu(Menu menu)
+        // POST api/RestaurantTag
+        [ResponseType(typeof(RestaurantTag))]
+        public IHttpActionResult PostRestaurantTag(RestaurantTag restauranttag)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Menus.Add(menu);
+            db.RestaurantTags.Add(restauranttag);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = menu.MenuID }, menu);
+            return CreatedAtRoute("DefaultApi", new { id = restauranttag.RestaurantTagID }, restauranttag);
         }
 
-        // DELETE api/Menu/5
-        [ResponseType(typeof(Menu))]
-        public IHttpActionResult DeleteMenu(int id)
+        // DELETE api/RestaurantTag/5
+        [ResponseType(typeof(RestaurantTag))]
+        public IHttpActionResult DeleteRestaurantTag(int id)
         {
-            Menu menu = db.Menus.Find(id);
-            if (menu == null)
+            RestaurantTag restauranttag = db.RestaurantTags.Find(id);
+            if (restauranttag == null)
             {
                 return NotFound();
             }
 
-            db.Menus.Remove(menu);
+            db.RestaurantTags.Remove(restauranttag);
             db.SaveChanges();
 
-            return Ok(menu);
+            return Ok(restauranttag);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace Menulator.Controllers
             base.Dispose(disposing);
         }
 
-        private bool MenuExists(int id)
+        private bool RestaurantTagExists(int id)
         {
-            return db.Menus.Count(e => e.MenuID == id) > 0;
+            return db.RestaurantTags.Count(e => e.RestaurantTagID == id) > 0;
         }
     }
 }
