@@ -10,7 +10,7 @@ namespace Menulator.Models
     {
         [Key]
         public int UserLocationID { get; set; }
-        public int UserID { get; set; }
+        public int MemberID { get; set; }
         public string Title { get; set; }
         public string Address { get; set; }
     }
