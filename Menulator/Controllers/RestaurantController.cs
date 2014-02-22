@@ -12,7 +12,7 @@ namespace Menulator.Controllers
     
     public class RestaurantController : ApiController
     {
-        List<Restaurant> restaurants = new List<Restaurant> { new Restaurant { ID = 0, Name = "Drexel Pizza", Description = "Pizza pizza." }, new Restaurant { ID = 1, Name = "Sabrains", Description = "Brunch" } };
+        List<Restaurant> restaurants = new List<Restaurant> { new Restaurant { RestaurantID = 0, Name = "Drexel Pizza", Description = "Pizza pizza.", Contact = 0}, new Restaurant { RestaurantID = 1, Name = "Sabrains", Description = "Brunch", Contact = 1} };
         // GET api/values
         public List<Restaurant> Get()
         {
@@ -23,7 +23,7 @@ namespace Menulator.Controllers
         public Restaurant Get(int id)
         {
             var Selected = from r in restaurants
-                    where r.ID == id
+                    where r.RestaurantID == id
                     select r;
             if (Selected.Count() > 0)
                 return Selected.ElementAt(0);
