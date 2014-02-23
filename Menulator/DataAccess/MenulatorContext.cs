@@ -10,7 +10,7 @@ namespace Menulator.DataAccess
     public class MenulatorContext : DbContext
     {
         public MenulatorContext()
-            : base("MenulatorContext")
+            : base("RestaurantContext")
         { }
  
         public DbSet<Category> Categories { get; set; }
