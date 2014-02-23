@@ -36,6 +36,13 @@ namespace Menulator.Controllers
             return Ok(preference);
         }
 
+       //Brian
+       [HttpGet]
+       public IQueryable<Preference> GetUserPreferences(int memberID, int gib)
+       {
+           return (from x in db.Preferences where (x.MemberID == memberID) select x);
+       }
+       
         // PUT api/Preference/5
         public IHttpActionResult PutPreference(int id, Preference preference)
         {
