@@ -5,10 +5,15 @@ using System.Web;
 
 namespace Menulator.Models
 {
-    public class Restaurant
+    public class Order
     {
         public int ID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public int MemberID { get; set; }
+  
+        public int OrderItemID { get; set; }
+    
+        public DateTime Date { get; set; }
+    
     }
+
 }
