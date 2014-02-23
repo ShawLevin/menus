@@ -24,9 +24,9 @@ namespace Menulator.Controllers
         }
 
         [HttpGet]
-        public IQueryable<Category> Search(int id)
+        public IQueryable<Category> Search(int filter)
         {
-            return (from x in db.Categories where x.MenuID == id select x);
+            return (from x in db.Categories where x.MenuID == filter select x);
         }
 
         // GET api/Category/5

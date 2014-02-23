@@ -24,9 +24,9 @@ namespace Menulator.Controllers
         }
 
         [HttpGet]
-        public IQueryable<RestaurantTag> Search(int id)
+        public IQueryable<RestaurantTag> Search(int filter)
         {
-            return (from x in db.RestaurantTags where x.RestaurantID == id select x);
+            return (from x in db.RestaurantTags where x.RestaurantID == filter select x);
         }
 
         // GET api/RestaurantTag/5

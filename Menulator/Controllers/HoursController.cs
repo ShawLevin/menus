@@ -24,9 +24,9 @@ namespace Menulator.Controllers
         }
 
         [HttpGet]
-        public IQueryable<Hours> Search(int id)
+        public IQueryable<Hours> Search(int filter)
         {
-            return (from x in db.Hours where x.LocationID==id select x);
+            return (from x in db.Hours where x.LocationID==filter select x);
         }
 
         // GET api/Hours/5
