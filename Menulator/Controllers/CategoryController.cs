@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Menulator.Models;
 using Menulator.DataAccess;
+using Menulator.Helpers;
 
 namespace Menulator.Controllers
 {
@@ -24,9 +25,10 @@ namespace Menulator.Controllers
         }
 
         [HttpGet]
-        public IQueryable<Category> Search(int filter)
+        public IQueryable<MenuItems> Search(int filter)
         {
-            return (from x in db.Categories where x.MenuID == filter select x);
+            IQueryable<MenuItems> items = (from c in db.Categories join i in db.Items on c.CategoryID equals i.CategoryID select new MenuItems { CategoryID = c.CategoryID, Description = c.Description, Details = i.Description, ItemID = i.ItemID, MenuID = c.MenuID, Name = c.Name, ParentCategoryID = c.ParentCategoryID, Price = i.Price, Title = i.Title });
+            return (from x in items where x.MenuID == filter select x);
         }
 
         // GET api/Category/5
