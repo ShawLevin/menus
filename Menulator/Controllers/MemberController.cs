@@ -85,6 +85,20 @@ namespace Menulator.Controllers
             return CreatedAtRoute("DefaultApi", new { id = member.MemberID }, member);
         }
 
+        //Brian Prolly No Work
+        [Route("api/Member/GetMemberByEmail/")]
+        [ResponseType(typeof(Member))]
+        public IHttpActionResult GetMemberByEmail(string email)
+        {
+            Member member =
+                (from x in db.Members where x.Email.ToLower() == email.ToLower() select x).ElementAt(0);
+            if(member == null)
+                return NotFound();
+
+            return Ok(member); 
+        }
+
+
         // DELETE api/Member/5
         [ResponseType(typeof(Member))]
         public IHttpActionResult DeleteMember(int id)
