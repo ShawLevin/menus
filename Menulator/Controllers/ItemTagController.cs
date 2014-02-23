@@ -23,6 +23,12 @@ namespace Menulator.Controllers
             return db.ItemTags;
         }
 
+        [HttpGet]
+        public IQueryable<ItemTag> Search(int item)
+        {
+            return (from x in db.ItemTags where x.ItemID == item select x);
+        }
+
         // GET api/ItemTag/5
         [ResponseType(typeof(ItemTag))]
         public IHttpActionResult GetItemTag(int id)

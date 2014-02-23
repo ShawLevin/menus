@@ -23,6 +23,12 @@ namespace Menulator.Controllers
             return db.Hours;
         }
 
+        [HttpGet]
+        public IQueryable<Hours> Search(int id)
+        {
+            return (from x in db.Hours where x.LocationID==id select x);
+        }
+
         // GET api/Hours/5
         [ResponseType(typeof(Hours))]
         public IHttpActionResult GetHours(int id)

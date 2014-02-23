@@ -231,6 +231,10 @@
     <Compile Include="Migrations\201402222339357_MoreColumns.Designer.cs">
       <DependentUpon>201402222339357_MoreColumns.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201402222357128_FixingMember.cs" />
+    <Compile Include="Migrations\201402222357128_FixingMember.Designer.cs">
+      <DependentUpon>201402222357128_FixingMember.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -326,6 +330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201402222339357_MoreColumns.resx">
       <DependentUpon>201402222339357_MoreColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402222357128_FixingMember.resx">
+      <DependentUpon>201402222357128_FixingMember.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

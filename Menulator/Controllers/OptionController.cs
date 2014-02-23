@@ -23,6 +23,12 @@ namespace Menulator.Controllers
             return db.Options;
         }
 
+        [HttpGet]
+        public IQueryable<Option> Search(int id)
+        {
+            return (from x in db.Options where x.ItemID == id select x);
+        }
+
         // GET api/Option/5
         [ResponseType(typeof(Option))]
         public IHttpActionResult GetOption(int id)
