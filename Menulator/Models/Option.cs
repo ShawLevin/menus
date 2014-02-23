@@ -14,5 +14,6 @@ namespace Menulator.Models
         public double Cost { get; set; }
         public string Description { get; set; }
         public int Max { get; set; }
+        public string OptionCategory { get; set; }
     }
 }
