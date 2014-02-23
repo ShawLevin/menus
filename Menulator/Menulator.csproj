@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201402230041517_ColumnFixes.Designer.cs">
       <DependentUpon>201402230041517_ColumnFixes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201402230114140_OptionCatFix.cs" />
+    <Compile Include="Migrations\201402230114140_OptionCatFix.Designer.cs">
+      <DependentUpon>201402230114140_OptionCatFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -340,6 +344,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201402230041517_ColumnFixes.resx">
       <DependentUpon>201402230041517_ColumnFixes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402230114140_OptionCatFix.resx">
+      <DependentUpon>201402230114140_OptionCatFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
