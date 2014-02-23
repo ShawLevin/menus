@@ -120,5 +120,45 @@ namespace Menulator.Controllers
         {
             return db.Menus.Count(e => e.MenuID == id) > 0;
         }
+
+        // GET api/Menu/GetCurrentMenu/5
+        [Route ("api/menu/getcurrentmenu/{restaurantID}")]
+        [ResponseType(typeof(Menu))]
+        public IHttpActionResult GetCurrentMenu(int restaurantID)
+        {
+            IQueryable<Menu> allMenus = db.Menus.OrderBy(menu => menu.Starting.Hour);
+            int currentHour = DateTime.Now.Hour;
+            int currentMinute = DateTime.Now.Minute;
+
+            IEnumerable<Menu> currentMenu = from menu in allMenus
+                                            where
+                                            (menu.Starting.Hour <= currentHour
+                                            ||
+                                            (menu.Starting.Hour == currentHour &&
+                                            menu.Starting.Minute <= currentMinute))
+                                            &&
+                                            (menu.Ending.Hour > currentHour
+                                            ||
+                                            (menu.Ending.Hour == currentHour &&
+                                            menu.Ending.Minute > currentMinute))
+                                            orderby menu.Starting.Hour
+                                            select menu;
+
+            if (currentMenu.Count() == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(currentMenu.FirstOrDefault());
+        }
+
+
+        // GET api/Menu/GetAllMenusForRestaurant/5
+        [Route("api/menu/GetAllMenusForRestaurant/{restaurantID}")]
+        [HttpGet]
+        public IQueryable<Menu> GetAllMenusForRestaurant(int restaurantID)
+        {
+            return (from x in db.Menus where x.RestaurantID == restaurantID select x);
+        }
     }
 }
