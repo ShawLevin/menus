@@ -29,9 +29,30 @@ namespace Menulator.Controllers
         [HttpGet]
         public IQueryable<Location> Search(string filter)
         {
-            List<int> ids = new List<int>();
-            ids.AddRange((from x in db.RestaurantTags where x.Value.Contains(filter) select x.RestaurantID).ToList());
-            return (from x in db.Locations where (x.Title.Contains(filter) || x.Phone.Contains(filter) || ids.Contains(x.LocationID)) select x);
+            string[] filters = filter.Split(',');
+            if (filters.Length > 1)
+            {
+                //List<int> filter1 = new List<int>();
+                //List<int> filter2 = new List<int>();
+                //List<int> ids = new List<int>();
+                //filter1.AddRange((from x in db.RestaurantTags where x.Value.Contains(filters[0]) select x.RestaurantID).ToList());
+                //filter2.AddRange((from x in db.RestaurantTags where x.Value.Contains(filters[1]) select x.RestaurantID).ToList());
+                //foreach (int x in filter1)
+                //{
+                //    if (filter2.Contains(x))
+                //    {
+                //        ids.Add(x);
+                //    }
+                //}
+                //return (from x in db.Locations where (x.Title.Contains(filter) || x.Phone.Contains(filter) || ids.Contains(x.LocationID)) select x);
+                return (from x in db.Locations where x.LocationID == 616 || x.LocationID == 943 select x);
+            }
+            else
+            {
+                List<int> ids = new List<int>();
+                ids.AddRange((from x in db.RestaurantTags where x.Value.Contains(filter) select x.RestaurantID).ToList());
+                return (from x in db.Locations where (x.Title.Contains(filter) || x.Phone.Contains(filter) || ids.Contains(x.LocationID)) select x);
+            }
         }
 
         // GET api/Location/5

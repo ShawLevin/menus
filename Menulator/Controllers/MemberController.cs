@@ -9,10 +9,12 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Menulator.Models;
+using System.Web.Http.Cors;
 using Menulator.DataAccess;
 
 namespace Menulator.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class MemberController : ApiController
     {
         private MenulatorContext db = new MenulatorContext();

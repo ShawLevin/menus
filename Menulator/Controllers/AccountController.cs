@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using Menulator.Models;
 using Menulator.Providers;
 using Menulator.Results;
+using System.Web.Http.Cors;
 
 namespace Menulator.Controllers
 {
