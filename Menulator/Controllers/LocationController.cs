@@ -29,7 +29,9 @@ namespace Menulator.Controllers
         [HttpGet]
         public IQueryable<Location> Search(string filter)
         {
-            return (from x in db.Locations where (x.Title.Contains(filter) || x.Phone.Contains(filter)) select x);
+            List<int> ids = new List<int>();
+            ids.AddRange((from x in db.RestaurantTags where x.Value.Contains(filter) select x.RestaurantID).ToList());
+            return (from x in db.Locations where (x.Title.Contains(filter) || x.Phone.Contains(filter) || ids.Contains(x.LocationID)) select x);
         }
 
         // GET api/Location/5

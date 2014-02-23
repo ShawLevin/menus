@@ -38,7 +38,8 @@ namespace Menulator.Controllers
 
        //Brian
        [HttpGet]
-       public IQueryable<Preference> GetUserPreferences(int memberID, int gib)
+       [Route("api/preference/getbyuser/{member}")]
+       public IQueryable<Preference> GetUserPreferences(int memberID)
        {
            return (from x in db.Preferences where (x.MemberID == memberID) select x);
        }

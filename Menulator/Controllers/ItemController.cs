@@ -30,7 +30,7 @@ namespace Menulator.Controllers
         }
 
         //Brian
-        [HttpGet]
+        [Route("api/item/getbypreference/{prefid}")]
         public IQueryable<Item> GetItemsByUserPreference(int prefID)
         {
             String pref = db.Preferences.Find(prefID).ItemTagValue;
