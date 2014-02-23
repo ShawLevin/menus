@@ -121,6 +121,13 @@ namespace Menulator.Controllers
             return db.Menus.Count(e => e.MenuID == id) > 0;
         }
 
+        [Route("api/menu/getdatetime")]
+        [ResponseType(typeof(DateTime))]
+        public IHttpActionResult GetDateTime()
+        {
+            return Ok(DateTime.Now);
+        }
+
         // GET api/Menu/GetCurrentMenu/5
         [Route ("api/menu/getcurrentmenu/{restaurantID}")]
         [ResponseType(typeof(Menu))]

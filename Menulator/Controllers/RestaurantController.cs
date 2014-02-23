@@ -26,10 +26,18 @@ namespace Menulator.Controllers
             return db.Restaurants;
         }
 
+        [Route("api/restaurant/getbycity/{city}")]
+        public IQueryable<Restaurant> GetRestaurantsByCity(string city)
+        {
+            return (from x in db.Restaurants where x.Description.Contains(city) select x);
+        }
+
         [HttpGet]
         public IQueryable<Restaurant> Search(string filter)
         {
-            return (from x in db.Restaurants where (x.Name.Contains(filter) || x.Description.Contains(filter)) select x);
+            List<int> ids = new List<int>();
+            ids.AddRange((from x in db.RestaurantTags where x.Value.Contains(filter) select x.RestaurantID).ToList());
+            return (from x in db.Restaurants where (x.Name.Contains(filter) || x.Description.Contains(filter)) || ids.Contains(x.RestaurantID) select x);
         }
 
         // GET api/Restaurant/5
