@@ -29,15 +29,37 @@ namespace Menulator.Controllers
             return (from x in db.Items where x.CategoryID == filter select x);
         }
 
-        //Brian
-        [Route("api/item/getbypreference/{prefid}")]
+
+        [Route("api/Item/GetMostFrequentOrderByRestaurant/{restaurantID}")]
+        // GET api/Order
+        public IQueryable<Item> GetMostPopularItemByRestaurant(int restaurantID)
+        {
+            db.Restaurants.Find(restaurantID);
+            IQueryable<Item> restaurantItems = (from x in db.Menus
+                                                join y in db.Orders
+                                                on x.MenuID equals y.MenuID
+                                                join z in db.OrderItems
+                                                on y.OrderID equals z.OrderID
+                                                join a in db.Items
+                                                on z.ItemID equals a.ItemID
+                                                select a);
+
+            var list = (from c in restaurantItems
+                        group c by c into g
+                        orderby g.Count() descending
+                        select g.Key).Take(2);// FirstOrDefault();
+
+            return list;
+        }
+
+        [HttpGet]
         public IQueryable<Item> GetItemsByUserPreference(int prefID)
         {
             String pref = db.Preferences.Find(prefID).ItemTagValue;
-            IQueryable<int>  itemIDs = (from x in db.ItemTags where x.Value == pref select x.ItemID);
+            IQueryable<int> itemIDs = (from x in db.ItemTags where x.Value == pref select x.ItemID);
             return (from x in db.Items where (itemIDs.Contains(x.ItemID)) select x);
         }
-       
+
         // GET api/Item/5
         [ResponseType(typeof(Item))]
         public IHttpActionResult GetItem(int id)
