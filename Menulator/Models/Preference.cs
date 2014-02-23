@@ -10,7 +10,7 @@ namespace Menulator.Models
     {
         [Key]
         public int PreferenceID { get; set; }
-        public int UserID { get; set; }
+        public int MemberID { get; set; }
         //Will be used to get any items which have the attribute defined by attribute (rather than relate to a specific item attribute)
         public string ItemTagValue { get; set; }
         public bool Flag { get; set; }
