@@ -29,6 +29,15 @@ namespace Menulator.Controllers
             return (from x in db.Items where x.CategoryID == filter select x);
         }
 
+        //Brian
+        [HttpGet]
+        public IQueryable<Item> GetItemsByUserPreference(int prefID)
+        {
+            String pref = db.Preferences.Find(prefID).ItemTagValue;
+            IQueryable<int>  itemIDs = (from x in db.ItemTags where x.Value == pref select x.ItemID);
+            return (from x in db.Items where (itemIDs.Contains(x.ItemID)) select x);
+        }
+       
         // GET api/Item/5
         [ResponseType(typeof(Item))]
         public IHttpActionResult GetItem(int id)
