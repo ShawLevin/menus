@@ -126,11 +126,13 @@ namespace Menulator.Controllers
         [ResponseType(typeof(Menu))]
         public IHttpActionResult GetCurrentMenu(int restaurantID)
         {
-            IQueryable<Menu> allMenus = db.Menus.OrderBy(menu => menu.Starting.Hour);
-            int currentHour = DateTime.Now.Hour;
+            IQueryable<Menu> allMenusForRestaurant = db.Menus.Where(menu => menu.RestaurantID == restaurantID);
+
+            //Convert the hour to ETC before comparing
+            int currentHour = (24 + (DateTime.Now.ToUniversalTime().Hour - 5)) % 24;
             int currentMinute = DateTime.Now.Minute;
 
-            IEnumerable<Menu> currentMenu = from menu in allMenus
+            IEnumerable<Menu> currentMenu = from menu in allMenusForRestaurant
                                             where
                                             (menu.Starting.Hour <= currentHour
                                             ||
