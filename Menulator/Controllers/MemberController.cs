@@ -86,16 +86,17 @@ namespace Menulator.Controllers
         }
 
         //Brian Prolly No Work
-        [Route("api/Member/GetMemberByEmail/")]
+        [Route("api/Member/GetMemberByEmail/{emailA}/{emailB}")]
         [ResponseType(typeof(Member))]
-        public IHttpActionResult GetMemberByEmail(string email)
+        public IHttpActionResult GetMemberByEmail(string emailA,string emailB)
         {
-            Member member =
-                (from x in db.Members where x.Email.ToLower() == email.ToLower() select x).ElementAt(0);
-            if(member == null)
+            string email = emailA + "." + emailB;
+            IEnumerable<Member> member =
+                (from x in db.Members where x.Email.ToLower() == email.ToLower() select x);
+            if(member.Count() < 1)
                 return NotFound();
 
-            return Ok(member); 
+            return Ok(member.FirstOrDefault()); 
         }
 
 
